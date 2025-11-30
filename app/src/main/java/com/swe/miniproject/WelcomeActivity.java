@@ -38,7 +38,7 @@ public class WelcomeActivity extends AppCompatActivity {
         });
 
         btnStart.setOnClickListener(v -> {
-            Intent intent = new Intent(WelcomeActivity.this, MainActivity.class);
+            Intent intent = new Intent(WelcomeActivity.this, QualificationActivity.class);
             startActivity(intent);
         });
 

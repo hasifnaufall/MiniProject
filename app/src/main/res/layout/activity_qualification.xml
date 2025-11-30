@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".QualificationActivity">
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_back"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        app:tint="@color/navyBlue"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:contentDescription="Back" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Select Qualification"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/navyBlue"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="@+id/btnBack"
+        app:layout_constraintBottom_toBottomOf="@+id/btnBack"
+        app:layout_constraintStart_toEndOf="@+id/btnBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="40dp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSpm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="SPM Taker"
+            style="@style/ModernButton" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStpm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="STPM Taker"
+            android:layout_marginTop="16dp"
+            style="@style/ModernButton" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnStam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="STAM Taker"
+            android:layout_marginTop="16dp"
+            style="@style/ModernButton" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,12 @@
 package com.swe.miniproject;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -24,6 +26,7 @@ public class ProgrammeListActivity extends AppCompatActivity {
 
         TextView tvProgrammeTitle = findViewById(R.id.tvProgrammeTitle);
         LinearLayout llProgrammeDetails = findViewById(R.id.llProgrammeDetails);
+        Button btnApply = findViewById(R.id.btnApply);
 
         String programmeTitle = getIntent().getStringExtra("programmeTitle");
         String programmeList = getIntent().getStringExtra("programmeList");
@@ -32,27 +35,6 @@ public class ProgrammeListActivity extends AppCompatActivity {
 
         // Clear previous views, if any
         llProgrammeDetails.removeAllViews();
-
-        // Handle the GAPP Programme header image
-        if (programmeTitle.equals("GAPP Programme")) {
-            ImageView ivGappHeader = new ImageView(this);
-            ivGappHeader.setImageResource(R.drawable.gapp_header);
-            ivGappHeader.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
-            ivGappHeader.setAdjustViewBounds(true);
-            llProgrammeDetails.addView(ivGappHeader);
-        } else if (programmeTitle.equals("GUFP Programme")) {
-            ImageView ivGufpHeader = new ImageView(this);
-            ivGufpHeader.setImageResource(R.drawable.gufp_header);
-            ivGufpHeader.setLayoutParams(new LinearLayout.LayoutParams(
-                    LinearLayout.LayoutParams.MATCH_PARENT,
-                    LinearLayout.LayoutParams.WRAP_CONTENT
-            ));
-            ivGufpHeader.setAdjustViewBounds(true);
-            llProgrammeDetails.addView(ivGufpHeader);
-        }
 
         // Split the programmeList string into individual key-value pairs
         String[] lines = programmeList.split("\n");
@@ -78,5 +60,10 @@ public class ProgrammeListActivity extends AppCompatActivity {
             // Add the inflated view to the LinearLayout
             llProgrammeDetails.addView(detailView);
         }
+
+        btnApply.setOnClickListener(v -> {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://gmi.vialing.com/oa/login"));
+            startActivity(browserIntent);
+        });
     }
 }

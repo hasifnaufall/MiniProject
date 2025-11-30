@@ -114,27 +114,27 @@ public class DiplomaListActivity extends AppCompatActivity {
                         + "5. Photographer & Videographer\n"
                         + "6. Mobile Apps Developer";
             case "Diploma of Mechatronics Engineering Technology":
-                return "Mode: Onsite\n"
-                        + "Intakes: January, April, July\n"
-                        + "Conducted in Malaysia: Yes\n"
-                        + "Field of Study: Engineering & Engineering Trades\n"
-                        + "Exam Body: Internal Diploma, Malaysia\n"
-                        + "Duration: 3 years (6 semesters)\n"
-                        + "Type: Full-time Study\n"
-                        + "Level of Study: Diploma Level\n"
-                        + "Faculty: Electrical Engineering Department\n"
-                        + "Fees: 28980 / Course / 54000 / Course (international)";
+                return "Program Code: (R3/0713/4/0041) (07/30) (MQA/FA 14611)\n"
+                        + "Status: Accredited\n"
+                        + "Study Mode: Full Time\n"
+                        + "Fee: RM 33,324\n"
+                        + "Duration: 6 Semester/ 3 Years\n"
+                        + "Job Opportunity:\n"
+                        + "1. Assistant Mechatronics Engineer\n"
+                        + "2. Automation Technical Specialist\n"
+                        + "3. Automation System Designer\n"
+                        + "4. Remote Operating Vehicle (ROV) Supervisor.";
             case "Diploma of Engineering Technology (Instrumentation & Control)":
-                return "Mode: Onsite\n"
-                        + "Intakes: January, April, July\n"
-                        + "Conducted in Malaysia: Yes\n"
-                        + "Field of Study: Engineering & Engineering Trades\n"
-                        + "Exam Body: Internal Diploma, Malaysia\n"
-                        + "Duration: 3 years (6 semesters)\n"
-                        + "Type: Full-time Study\n"
-                        + "Level of Study: Diploma Level\n"
-                        + "Faculty: Electrical Engineering Department\n"
-                        + "Fees: 28980 / Course / 54000 / Course (international)";
+                return "Program Code: (R3/0741/4/0012) (07/30) (MQA/FA 14612)\n"
+                        + "Status: Accredited\n"
+                        + "Study Mode: Full Time\n"
+                        + "Fee: RM 33,324\n"
+                        + "Duration: 6 Semester/ 3 Years\n"
+                        + "Job Opportunity:\n"
+                        + "1. Field Assistant Engineer\n"
+                        + "2. Control & Instrumentation Technologist\n"
+                        + "3. Service Assistant Engineer\n"
+                        + "4. Process Assistant Engineer";
             case "Diploma of Electronics Engineering Technology (Computer)":
                 return "Program Code: (R3/0741/4/0013) (07/30) (MQA/FA 14613)\n"
                         + "Status: Accredited\n"
@@ -162,7 +162,7 @@ public class DiplomaListActivity extends AppCompatActivity {
                         + "6. R&D Engineer\n"
                         + "7. Sustainable Energy Technologist\n"
                         + "8. Renewable Energy Power Designer";
-            case "Autotronics Engineering Technology":
+            case "Diploma in Autotronics Engineering Technology":
                 return "Program Code: (R/523/4/0223) (12/24) (MQA/FA 4936)\n"
                         + "Status: Accredited\n"
                         + "Study Mode: Full Time\n"
@@ -185,6 +185,17 @@ public class DiplomaListActivity extends AppCompatActivity {
                         + "3. Product Designer\n"
                         + "4. Furniture Designer\n"
                         + "5. 3D Visualizer";
+            case "Diploma in Innovative Product Design Engineering Technology":
+                return "Program Code: (R2/0741/4/0006) (01/26) (A 7165)\n"
+                        + "Status: Accredited\n"
+                        + "Study Mode: Full Time\n"
+                        + "Fee: RM 33,324\n"
+                        + "Duration: 6 Semester/ 3 Years\n"
+                        + "Job Opportunity:\n"
+                        + "1. Product Designer\n"
+                        + "2. CAD Application Assistant Engineer\n"
+                        + "3. Product and Realibility Assistant Engineer\n"
+                        + "4. Quality Assurance Executive";
             case "Diploma in Engineering Technology(Machine Tools Maintenance)":
                 return "Status: Accredited\n"
                         + "Study Mode: Full Time\n"

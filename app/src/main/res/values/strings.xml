@@ -13,6 +13,27 @@
         <item>E</item>
         <item>G</item>
     </string-array>
+    <string-array name="stpm_grades_array">
+        <item>A</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B</item>
+        <item>B-</item>
+        <item>C+</item>
+        <item>C</item>
+        <item>C-</item>
+        <item>D</item>
+        <item>F</item>
+    </string-array>
+    <string-array name="stpm_subjects_array">
+        <item>Bahasa Melayu</item>
+        <item>Sejarah</item>
+        <item>Geografi</item>
+        <item>Ekonomi</item>
+        <item>Pengajian Perniagaan</item>
+        <item>Mathematics (M)</item>
+        <item>Mathematics (T)</item>
+    </string-array>
     <string-array name="diploma_courses">
         <item>Diploma of Mechatronics Engineering Technology</item>
         <item>Diploma of Engineering Technology (Instrumentation &amp; Control)</item>

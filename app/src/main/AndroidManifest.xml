@@ -23,6 +23,8 @@
     <activity android:name=".ProgrammeListActivity" android:exported="true" />
     <activity android:name=".DiplomaListActivity" android:exported="true" />
     <activity android:name=".DiplomaDepartmentsActivity" android:exported="true" />
+    <activity android:name=".QualificationActivity" android:exported="true" />
+    <activity android:name=".StpmEligibilityActivity" android:exported="true" />
     </application>
 
 </manifest>

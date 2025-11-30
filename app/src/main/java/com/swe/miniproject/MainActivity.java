@@ -94,7 +94,8 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "No eligible courses found based on your results.", Toast.LENGTH_LONG).show();
             } else {
                 Intent intent = new Intent(MainActivity.this, UserResult.class);
-                intent.putStringArrayListExtra("eligibleCourses", eligibleCourses);
+                intent.putExtra("eligibleCourses", eligibleCourses);
+                intent.putExtra("sourceActivity", "SPM"); // Add this line
                 startActivity(intent);
             }
         });
