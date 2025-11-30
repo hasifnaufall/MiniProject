@@ -17,6 +17,7 @@ public class WelcomeActivity extends AppCompatActivity {
         Button btnGufp = findViewById(R.id.btnGufp);
         Button btnStart = findViewById(R.id.btnStart);
         Button btnEnquiry = findViewById(R.id.btnEnquiry);
+        Button btnAboutUs = findViewById(R.id.btnAboutUs);
 
         btnDiploma.setOnClickListener(v -> {
             Intent intent = new Intent(WelcomeActivity.this, DiplomaDepartmentsActivity.class);
@@ -44,6 +45,11 @@ public class WelcomeActivity extends AppCompatActivity {
 
         btnEnquiry.setOnClickListener(v -> {
             Intent intent = new Intent(WelcomeActivity.this, EnquiryActivity.class);
+            startActivity(intent);
+        });
+
+        btnAboutUs.setOnClickListener(v -> {
+            Intent intent = new Intent(WelcomeActivity.this, AboutUsActivity.class);
             startActivity(intent);
         });
     }

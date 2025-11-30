@@ -3,20 +3,27 @@ package com.swe.miniproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity {
 
     private List<CourseRequirement> courseList;
+    private LinearLayout subjectsContainer;
+    private List<View> subjectViews = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +35,18 @@ public class MainActivity extends AppCompatActivity {
             finish();
         });
 
+        subjectsContainer = findViewById(R.id.llSpmSubjectsContainer);
+        Button btnAddSpmSubject = findViewById(R.id.btnAddSpmSubject);
+
+        // Add three initial subject rows
+        addSpmSubjectRow();
+        addSpmSubjectRow();
+        addSpmSubjectRow();
+
+        btnAddSpmSubject.setOnClickListener(v -> {
+            addSpmSubjectRow();
+        });
+
         // Initialize course requirements (all diplomas use the same requirements)
         courseList = new ArrayList<>();
         courseList.add(new CourseRequirement("GAPP Foundation", "GAPP", "A", "A", "A", "A", "F", "F", "F"));
@@ -36,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         courseList.add(new CourseRequirement("Diploma of Engineering Technology (Instrumentation & Control)", "Diploma", "E", "E", "E", "C", "F", "F", "F"));
         courseList.add(new CourseRequirement("Diploma of Electronics Engineering Technology (Computer)", "Diploma", "E", "E", "E", "C", "F", "F", "F"));
         courseList.add(new CourseRequirement("Diploma in Engineering Technology (Sustainable Energy & Power Distribution)", "Diploma", "E", "E", "E", "C", "F", "F", "F"));
-        courseList.add(new CourseRequirement("Autotronics Engineering Technology", "Diploma", "E", "E", "E", "C", "F", "F", "F"));
+        courseList.add(new CourseRequirement("Diploma in Autotronics Engineering Technology", "Diploma", "E", "E", "E", "C", "F", "F", "F"));
         courseList.add(new CourseRequirement("Diploma in Engineering Technology (Industrial Design)", "Diploma", "E", "E", "E", "C", "F", "F", "F"));
         courseList.add(new CourseRequirement("Diploma in Innovative Product Design Engineering Technology", "Diploma", "E", "E", "E", "C", "F", "F", "F"));
         courseList.add(new CourseRequirement("Diploma in Engineering Technology(Machine Tools Maintenance)", "Diploma", "E", "E", "E", "C", "F", "F", "F"));
@@ -59,12 +78,6 @@ public class MainActivity extends AppCompatActivity {
         etSejarah.setAdapter(adapter);
         AutoCompleteTextView etMath = findViewById(R.id.etMath);
         etMath.setAdapter(adapter);
-        AutoCompleteTextView etPrinsipPerakaunan = findViewById(R.id.etPrinsipPerakaunan);
-        etPrinsipPerakaunan.setAdapter(adapter);
-        AutoCompleteTextView etSainsKomp = findViewById(R.id.etSainsKomp);
-        etSainsKomp.setAdapter(adapter);
-        AutoCompleteTextView etKimia = findViewById(R.id.etKimia);
-        etKimia.setAdapter(adapter);
 
         Button btnCheck = findViewById(R.id.btnCheckEligibility);
 
@@ -79,13 +92,55 @@ public class MainActivity extends AppCompatActivity {
                 return;
             }
 
-            String prinsipPerakaunan = etPrinsipPerakaunan.getText().toString().trim().toUpperCase();
-            String sainsKomp = etSainsKomp.getText().toString().trim().toUpperCase();
-            String kimia = etKimia.getText().toString().trim().toUpperCase();
+            List<String> optionalSubjects = new ArrayList<>();
+            List<String> optionalGrades = new ArrayList<>();
+
+            for (View subjectView : subjectViews) {
+                AutoCompleteTextView etSubjectName = subjectView.findViewById(R.id.etSpmSubjectName);
+                AutoCompleteTextView etSubjectGrade = subjectView.findViewById(R.id.etSpmSubjectGrade);
+
+                String subjectName = etSubjectName.getText().toString().trim();
+                String subjectGrade = etSubjectGrade.getText().toString().trim().toUpperCase();
+
+                if (!subjectName.isEmpty() && !subjectGrade.isEmpty()) {
+                    optionalSubjects.add(subjectName);
+                    optionalGrades.add(subjectGrade);
+                }
+            }
+
+            // Check for duplicate subjects
+            Set<String> uniqueSubjects = new HashSet<>(optionalSubjects);
+            if (uniqueSubjects.size() < optionalSubjects.size()) {
+                Toast.makeText(MainActivity.this, "Please select unique optional subjects.", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String prinsipPerakaunan = "F";
+            String chemistry = "F";
+            String physics = "F";
+            String pendidikanQuranSunnah = "F";
+            String pendidikanIslam = "F";
+
+            for (int i = 0; i < optionalSubjects.size(); i++) {
+                String subject = optionalSubjects.get(i);
+                String grade = optionalGrades.get(i);
+
+                if (subject.equals("Prinsip Perakaunan")) {
+                    prinsipPerakaunan = grade;
+                } else if (subject.equals("Chemistry")) {
+                    chemistry = grade;
+                } else if (subject.equals("Physics")) {
+                    physics = grade;
+                } else if (subject.equals("Pendidikan AL-QURAN & AS-SUNNAH")) {
+                    pendidikanQuranSunnah = grade;
+                } else if (subject.equals("Pendidikan Islam")) {
+                    pendidikanIslam = grade;
+                }
+            }
 
             ArrayList<String> eligibleCourses = new ArrayList<>();
             for (CourseRequirement cr : courseList) {
-                if (isEligible(bm, english, sejarah, math, prinsipPerakaunan, sainsKomp, kimia, cr)) {
+                if (isEligible(bm, english, sejarah, math, prinsipPerakaunan, chemistry, physics, pendidikanQuranSunnah, pendidikanIslam, cr)) {
                     eligibleCourses.add(cr.courseName + " (" + cr.programmeType + ")");
                 }
             }
@@ -95,20 +150,39 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Intent intent = new Intent(MainActivity.this, UserResult.class);
                 intent.putExtra("eligibleCourses", eligibleCourses);
-                intent.putExtra("sourceActivity", "SPM"); // Add this line
+                intent.putExtra("sourceActivity", "SPM");
                 startActivity(intent);
             }
         });
     }
 
-    private boolean isEligible(String bm, String english, String sejarah, String math, String prinsipPerakaunan, String sainsKomp, String kimia, CourseRequirement cr) {
+    private void addSpmSubjectRow() {
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View subjectView = inflater.inflate(R.layout.spm_subject_item, subjectsContainer, false);
+
+        String[] grades = getResources().getStringArray(R.array.grades_array);
+        String[] optionalSubjects = getResources().getStringArray(R.array.spm_optional_subjects_array);
+
+        ArrayAdapter<String> gradesAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, grades);
+        ArrayAdapter<String> subjectsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_dropdown_item_1line, optionalSubjects);
+
+        AutoCompleteTextView etSpmSubjectName = subjectView.findViewById(R.id.etSpmSubjectName);
+        etSpmSubjectName.setAdapter(subjectsAdapter);
+        AutoCompleteTextView etSpmSubjectGrade = subjectView.findViewById(R.id.etSpmSubjectGrade);
+        etSpmSubjectGrade.setAdapter(gradesAdapter);
+
+        subjectsContainer.addView(subjectView);
+        subjectViews.add(subjectView);
+    }
+
+    private boolean isEligible(String bm, String english, String sejarah, String math, String prinsipPerakaunan, String chemistry, String physics, String pendidikanQuranSunnah, String pendidikanIslam, CourseRequirement cr) {
         return compareGrade(bm, cr.minBM) >= 0 &&
                 compareGrade(english, cr.minEnglish) >= 0 &&
                 compareGrade(sejarah, cr.minSejarah) >= 0 &&
                 compareGrade(math, cr.minMath) >= 0 &&
                 (cr.minPrinsipPerakaunan.equals("F") || compareGrade(prinsipPerakaunan, cr.minPrinsipPerakaunan) >= 0) &&
-                (cr.minSainsKomp.equals("F") || compareGrade(sainsKomp, cr.minSainsKomp) >= 0) &&
-                (cr.minKimia.equals("F") || compareGrade(kimia, cr.minKimia) >= 0);
+                (cr.minSainsKomp.equals("F") || compareGrade(chemistry, cr.minSainsKomp) >= 0) &&
+                (cr.minKimia.equals("F") || compareGrade(physics, cr.minKimia) >= 0);
     }
 
     private int compareGrade(String userGrade, String minGrade) {

@@ -25,6 +25,7 @@
     <activity android:name=".DiplomaDepartmentsActivity" android:exported="true" />
     <activity android:name=".QualificationActivity" android:exported="true" />
     <activity android:name=".StpmEligibilityActivity" android:exported="true" />
+    <activity android:name=".AboutUsActivity" android:exported="true" />
     </application>
 
 </manifest>

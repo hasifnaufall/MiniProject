@@ -1,14 +1,18 @@
 package com.swe.miniproject;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -36,30 +40,14 @@ public class DiplomaListActivity extends AppCompatActivity {
 
         TextView tvTitle = findViewById(R.id.tvDiplomaListTitle);
         ListView lvDiplomaCourses = findViewById(R.id.lvDiplomaCourses);
-        LinearLayout llHeader = findViewById(R.id.llHeader);
 
         String department = getIntent().getStringExtra("department");
         tvTitle.setText(department);
 
-        // Add header image based on department
-        ImageView headerImage = new ImageView(this);
-        if ("Electrical Engineering".equals(department)) {
-            headerImage.setImageResource(R.drawable.eed_header);
-        } else if ("Mechanical Engineering".equals(department)) {
-            headerImage.setImageResource(R.drawable.med_header);
-        } else if ("Computer Information Department".equals(department)) {
-            headerImage.setImageResource(R.drawable.cid_header);
-        }
-        headerImage.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        ));
-        headerImage.setAdjustViewBounds(true);
-        llHeader.addView(headerImage, 0);
-
         List<String> courses = departmentCourses.get(department);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, courses);
+        // Use the custom adapter
+        CourseAdapter adapter = new CourseAdapter(this, courses);
         lvDiplomaCourses.setAdapter(adapter);
 
         lvDiplomaCourses.setOnItemClickListener((parent, view, position, id) -> {
@@ -95,6 +83,28 @@ public class DiplomaListActivity extends AppCompatActivity {
                 "Diploma in Cyber Security Technology",
                 "Diploma in Creative Multimedia"
         )));
+    }
+
+    // Custom Adapter for the course list
+    private class CourseAdapter extends ArrayAdapter<String> {
+
+        public CourseAdapter(Context context, List<String> courses) {
+            super(context, 0, courses);
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            if (convertView == null) {
+                convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item_course, parent, false);
+            }
+
+            TextView tvCourseName = convertView.findViewById(R.id.tvCourseName);
+            String course = getItem(position);
+            tvCourseName.setText(course);
+
+            return convertView;
+        }
     }
 
     private String getDiplomaCourseDetails(String courseName) {

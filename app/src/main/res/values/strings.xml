@@ -34,12 +34,19 @@
         <item>Mathematics (M)</item>
         <item>Mathematics (T)</item>
     </string-array>
+    <string-array name="spm_optional_subjects_array">
+        <item>Prinsip Perakaunan</item>
+        <item>Chemistry</item>
+        <item>Physics</item>
+        <item>Pendidikan AL-QURAN &amp; AS-SUNNAH</item>
+        <item>Pendidikan Islam</item>
+    </string-array>
     <string-array name="diploma_courses">
         <item>Diploma of Mechatronics Engineering Technology</item>
         <item>Diploma of Engineering Technology (Instrumentation &amp; Control)</item>
         <item>Diploma of Electronics Engineering Technology (Computer)</item>
         <item>Diploma in Engineering Technology (Sustainable Energy &amp; Power Distribution)</item>
-        <item>Autotronics Engineering Technology</item>
+        <item>Diploma in Autotronics Engineering Technology</item>
         <item>Diploma in Engineering Technology (Industrial Design)</item>
         <item>Diploma in Innovative Product Design Engineering Technology</item>
         <item>Diploma in Engineering Technology(Machine Tools Maintenance)</item>
